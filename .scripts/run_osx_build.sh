@@ -67,7 +67,12 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
 else
 
 
-    rattler-build build --recipe ./recipe -m ./.ci_support/${CONFIG}.yaml --output-dir ${MINIFORGE_HOME}/conda-bld ${EXTRA_CB_OPTIONS:-}
+    rattler-build build --recipe ./recipe \
+        -m ./.ci_support/${CONFIG}.yaml \
+        --output-dir ${MINIFORGE_HOME}/conda-bld ${EXTRA_CB_OPTIONS:-} \
+        --extra-meta flow_run_id="$flow_run_id" \
+        --extra-meta remote_url="$remote_url" \
+        --extra-meta sha="$sha"
 
     ( startgroup "Inspecting artifacts" ) 2> /dev/null
 
