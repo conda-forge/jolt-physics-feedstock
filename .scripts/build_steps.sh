@@ -38,6 +38,8 @@ mamba install --update-specs --yes --quiet --channel conda-forge --strict-channe
 mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
     pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
 
+
+conda uninstall --force --yes conda-forge-ci-setup
 conda run pip install git+https://github.com/wolfv/conda-forge-ci-setup-feedstock.git@fix-validation-rb#subdirectory=recipe
 
 # set up the condarc
