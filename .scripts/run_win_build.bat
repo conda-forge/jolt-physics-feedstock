@@ -27,6 +27,8 @@ echo Installing dependencies
 mamba.exe install pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1" -c conda-forge --strict-channel-priority --yes
 if !errorlevel! neq 0 exit /b !errorlevel!
 
+conda run pip install git+https://github.com/wolfv/conda-forge-ci-setup-feedstock.git@fix-validation-rb#subdirectory=recipe
+
 :: Set basic configuration
 echo Setting up configuration
 setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
