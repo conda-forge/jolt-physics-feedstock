@@ -25,8 +25,6 @@ set "CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1"
 :: Provision the necessary dependencies to build the recipe later
 echo Installing dependencies
 mamba.exe install pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1" -c conda-forge --strict-channel-priority --yes
-conda.exe run pip install git+https://github.com/wolfv/conda-forge-ci-setup-feedstock.git@fix-validation-rb#subdirectory=recipe
-
 if !errorlevel! neq 0 exit /b !errorlevel!
 
 :: Set basic configuration
