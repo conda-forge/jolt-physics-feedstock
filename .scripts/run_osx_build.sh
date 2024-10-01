@@ -68,6 +68,11 @@ else
     printenv
     cat /System/Library/CoreServices/SystemVersion.plist
     curl -fsSL https://pixi.sh/install.sh | bash
+    source /Users/runner/.bashrc
+    pixi info
+
+    export SYSTEM_VERSION_COMPAT=0
+    cat /System/Library/CoreServices/SystemVersion.plist
     pixi info
 
     rattler-build build --recipe ./recipe \
