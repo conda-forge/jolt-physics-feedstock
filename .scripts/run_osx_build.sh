@@ -65,7 +65,7 @@ fi
 if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     echo "rattler-build does not currently support debug mode"
 else
-
+    printenv
 
     rattler-build build --recipe ./recipe \
         -m ./.ci_support/${CONFIG}.yaml \
