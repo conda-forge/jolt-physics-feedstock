@@ -25,10 +25,6 @@ conda activate base
 export CONDA_SOLVER="libmamba"
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
-curl -L https://github.com/prefix-dev/pixi/releases/download/v0.30.0/pixi-x86_64-apple-darwin -o ./pixi
-chmod +x ./pixi
-# run pixi info
-./pixi info
 
 mamba install --update-specs --quiet --yes --channel conda-forge --strict-channel-priority \
     pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
@@ -37,6 +33,12 @@ mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel
 
 echo -e "\n\nSetting up the condarc and mangling the compiler."
 setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
+
+# run pixi info
+curl -L https://github.com/prefix-dev/pixi/releases/download/v0.30.0/pixi-x86_64-apple-darwin -o ./pixi
+chmod u+x ./pixi
+# run pixi info
+./pixi info
 
 if [[ "${CI:-}" != "" ]]; then
   mangle_compiler ./ ./recipe .ci_support/${CONFIG}.yaml
@@ -68,7 +70,7 @@ fi
 if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     echo "rattler-build does not currently support debug mode"
 else
-
+    ./pixi info
     export SYSTEM_VERSION_COMPAT=0
     rattler-build build --recipe ./recipe \
         -m ./.ci_support/${CONFIG}.yaml \
