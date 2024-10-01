@@ -3,11 +3,15 @@ About jolt-physics-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/jolt-physics-feedstock/blob/main/LICENSE.txt)
 
-
+Home: https://github.com/jrouwe/JoltPhysics
 
 Package license: MIT
 
 Summary: A multi core friendly rigid body physics and collision detection library.
+
+Development: https://github.com/jrouwe/JoltPhysics
+
+Documentation: https://jrouwe.github.io/JoltPhysics/
 
 A multi core friendly rigid body physics and collision detection library. Written in C++. Suitable for games and VR applications. Used by Horizon Forbidden West.
 
@@ -36,10 +40,24 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>linux_aarch64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23108&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/jolt-physics-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>osx_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23108&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/jolt-physics-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23108&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/jolt-physics-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -178,4 +196,5 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@baszalmstra](https://github.com/baszalmstra/)
 
