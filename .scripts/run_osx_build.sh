@@ -26,7 +26,7 @@ export CONDA_SOLVER="libmamba"
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
 mamba install --update-specs --quiet --yes --channel conda-forge --strict-channel-priority \
-    pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
+    pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1" pixi
 mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
     pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
 
@@ -67,8 +67,6 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
 else
     printenv
     cat /System/Library/CoreServices/SystemVersion.plist
-    curl -fsSL https://pixi.sh/install.sh | bash
-    source /Users/runner/.bashrc
     pixi info
 
     export SYSTEM_VERSION_COMPAT=0
