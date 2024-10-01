@@ -67,6 +67,8 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
 else
     printenv
     cat /System/Library/CoreServices/SystemVersion.plist
+    curl -fsSL https://pixi.sh/install.sh | bash
+    pixi info
 
     rattler-build build --recipe ./recipe \
         -m ./.ci_support/${CONFIG}.yaml \
