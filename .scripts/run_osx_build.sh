@@ -66,7 +66,6 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     echo "rattler-build does not currently support debug mode"
 else
 
-    export SYSTEM_VERSION_COMPAT=0
     rattler-build build --recipe ./recipe \
         -m ./.ci_support/${CONFIG}.yaml \
         --output-dir ${MINIFORGE_HOME}/conda-bld ${EXTRA_CB_OPTIONS:-} \
