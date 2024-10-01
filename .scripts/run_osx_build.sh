@@ -25,7 +25,7 @@ conda activate base
 export CONDA_SOLVER="libmamba"
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
-curl -L https://github.com/prefix-dev/pixi/releases/download/v0.30.0/pixi-aarch64-apple-darwin -o ./pixi
+curl -L https://github.com/prefix-dev/pixi/releases/download/v0.30.0/pixi-x86_64-apple-darwin -o ./pixi
 chmod +x ./pixi
 # run pixi info
 ./pixi info
