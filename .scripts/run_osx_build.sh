@@ -26,7 +26,7 @@ export CONDA_SOLVER="libmamba"
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
 mamba install --update-specs --quiet --yes --channel conda-forge --strict-channel-priority \
-    pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1" pixi
+    pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
 mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
     pip mamba rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
 
@@ -65,17 +65,12 @@ fi
 if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     echo "rattler-build does not currently support debug mode"
 else
-    printenv
-    cat /System/Library/CoreServices/SystemVersion.plist
-    pixi info
 
     export SYSTEM_VERSION_COMPAT=0
-    cat /System/Library/CoreServices/SystemVersion.plist
-    pixi info
-
     rattler-build build --recipe ./recipe \
         -m ./.ci_support/${CONFIG}.yaml \
         --output-dir ${MINIFORGE_HOME}/conda-bld ${EXTRA_CB_OPTIONS:-} \
+        --target-platform "${HOST_PLATFORM}" \
         --extra-meta flow_run_id="$flow_run_id" \
         --extra-meta remote_url="$remote_url" \
         --extra-meta sha="$sha"

@@ -3,11 +3,15 @@ About jolt-physics-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/jolt-physics-feedstock/blob/main/LICENSE.txt)
 
-
+Home: https://github.com/jrouwe/JoltPhysics
 
 Package license: MIT
 
 Summary: A multi core friendly rigid body physics and collision detection library.
+
+Development: https://github.com/jrouwe/JoltPhysics
+
+Documentation: https://jrouwe.github.io/JoltPhysics/
 
 A multi core friendly rigid body physics and collision detection library. Written in C++. Suitable for games and VR applications. Used by Horizon Forbidden West.
 
