@@ -13,6 +13,7 @@
 
 setlocal enableextensions enabledelayedexpansion
 
+
 call :start_group "Configuring conda"
 
 :: Activate the base conda environment
@@ -50,6 +51,9 @@ call :end_group
 
 :: Build the recipe
 echo Building recipe
+:: set code page to UTF-8
+chcp 65001 >nul
+:: run rattler-build
 conda.exe run rattler-build build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
 if !errorlevel! neq 0 exit /b !errorlevel!
 
