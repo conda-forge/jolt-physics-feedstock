@@ -1,5 +1,5 @@
 context:
-  version: "5.5.0"
+  version: "5.6.0"
 
 package:
   name: jolt-physics
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v${{ version }}.zip
-  sha256: 4ab8853237bcb65b6162e2cf5001a05dc53d5128c2e8eedb5052b76e99de4617
+  sha256: 0af9beea51637ef805e624fe838ea2870f7b68cd48cbe1615c853bd9bcf4f1d7
 
 build:
   number: 0
