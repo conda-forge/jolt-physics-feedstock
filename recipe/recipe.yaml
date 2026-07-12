@@ -20,6 +20,10 @@ build:
             -DBUILD_SHARED_LIBS=ON ^
             -DCMAKE_BUILD_TYPE=Distribution ^
             -DCROSS_PLATFORM_DETERMINISTIC=ON ^
+            -DJPH_USE_CPU_COMPUTE=ON ^
+            -DJPH_USE_DX12=OFF ^
+            -DJPH_USE_MTL=OFF ^
+            -DJPH_USE_VK=OFF ^
             -DTARGET_VIEWER=OFF ^
             -DTARGET_SAMPLES=OFF ^
             -DTARGET_HELLO_WORLD=OFF ^
@@ -34,6 +38,10 @@ build:
             -DBUILD_SHARED_LIBS=ON \
             -DCMAKE_BUILD_TYPE=Distribution \
             -DCROSS_PLATFORM_DETERMINISTIC=ON \
+            -DJPH_USE_CPU_COMPUTE=ON \
+            -DJPH_USE_DX12=OFF \
+            -DJPH_USE_MTL=OFF \
+            -DJPH_USE_VK=OFF \
             -DTARGET_VIEWER=OFF \
             -DTARGET_SAMPLES=OFF \
             -DTARGET_HELLO_WORLD=OFF \
