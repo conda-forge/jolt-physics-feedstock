@@ -1,5 +1,6 @@
 context:
   version: "5.6.0"
+  build_number: 1
 
 package:
   name: jolt-physics
@@ -10,52 +11,53 @@ source:
   sha256: 0af9beea51637ef805e624fe838ea2870f7b68cd48cbe1615c853bd9bcf4f1d7
 
 build:
-  number: 0
+  number: ${{ build_number + 100 * (microarch_level|default(1)|int - 1) }}
+  variant:
+    use_keys:
+      - microarch_level
   script:
-    - if: win
-      then: |
-        cmake -GNinja ^
-            %CMAKE_ARGS% ^
-            -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-            -DBUILD_SHARED_LIBS=ON ^
-            -DCMAKE_BUILD_TYPE=Distribution ^
-            -DCROSS_PLATFORM_DETERMINISTIC=ON ^
-            -DJPH_USE_CPU_COMPUTE=ON ^
-            -DJPH_USE_DX12=OFF ^
-            -DJPH_USE_MTL=OFF ^
-            -DJPH_USE_VK=OFF ^
-            -DTARGET_VIEWER=OFF ^
-            -DTARGET_SAMPLES=OFF ^
-            -DTARGET_HELLO_WORLD=OFF ^
-            -DTARGET_UNIT_TESTS=OFF ^
-            -DTARGET_PERFORMANCE_TEST=OFF ^
-            -S %SRC_DIR%\Build
-        cmake --build . --target install
-      else: |
-        cmake -GNinja \
-            $CMAKE_ARGS \
-            -DCMAKE_INSTALL_PREFIX=$PREFIX \
-            -DBUILD_SHARED_LIBS=ON \
-            -DCMAKE_BUILD_TYPE=Distribution \
-            -DCROSS_PLATFORM_DETERMINISTIC=ON \
-            -DJPH_USE_CPU_COMPUTE=ON \
-            -DJPH_USE_DX12=OFF \
-            -DJPH_USE_MTL=OFF \
-            -DJPH_USE_VK=OFF \
-            -DTARGET_VIEWER=OFF \
-            -DTARGET_SAMPLES=OFF \
-            -DTARGET_HELLO_WORLD=OFF \
-            -DTARGET_UNIT_TESTS=OFF \
-            -DTARGET_PERFORMANCE_TEST=OFF \
-            -S $SRC_DIR/Build
-        cmake --build . --target install
+    interpreter: brush
+    env:
+      JOLT_X86_SIMD: ${{ "ON" if microarch_level|default(1)|int >= 3 else "OFF" }}
+    content: |
+      set -eux
+
+      # AVX512 requires microarchitecture level 4, which conda-forge CI cannot guarantee.
+      cmake -S "$SRC_DIR/Build" -B build -G Ninja \
+          ${CMAKE_ARGS} \
+          -DCMAKE_INSTALL_PREFIX="${LIBRARY_PREFIX:-$PREFIX}" \
+          -DBUILD_SHARED_LIBS=ON \
+          -DCMAKE_BUILD_TYPE=Distribution \
+          -DCROSS_PLATFORM_DETERMINISTIC=ON \
+          -DUSE_SSE4_1=$JOLT_X86_SIMD \
+          -DUSE_SSE4_2=$JOLT_X86_SIMD \
+          -DUSE_AVX=$JOLT_X86_SIMD \
+          -DUSE_AVX2=$JOLT_X86_SIMD \
+          -DUSE_AVX512=OFF \
+          -DUSE_LZCNT=$JOLT_X86_SIMD \
+          -DUSE_TZCNT=$JOLT_X86_SIMD \
+          -DUSE_F16C=$JOLT_X86_SIMD \
+          -DUSE_FMADD=OFF \
+          -DJPH_USE_CPU_COMPUTE=ON \
+          -DJPH_USE_DX12=OFF \
+          -DJPH_USE_MTL=OFF \
+          -DJPH_USE_VK=OFF \
+          -DTARGET_VIEWER=OFF \
+          -DTARGET_SAMPLES=OFF \
+          -DTARGET_HELLO_WORLD=OFF \
+          -DTARGET_UNIT_TESTS=OFF \
+          -DTARGET_PERFORMANCE_TEST=OFF
+      cmake --build build --target install
 
 requirements:
   build:
+    - if: unix and x86_64
+      then: x86_64-microarch-level ==${{ microarch_level }}
     - ${{ compiler("cxx") }}
     - ${{ stdlib("c") }}
     - cmake
     - ninja
+    - brush
 
 tests:
   - package_contents:
