@@ -22,6 +22,7 @@ build:
     content: |
       set -eux
 
+      # AVX512 requires microarchitecture level 4, which conda-forge CI cannot guarantee.
       cmake -S "$SRC_DIR/Build" -B build -G Ninja \
           ${CMAKE_ARGS} \
           -DCMAKE_INSTALL_PREFIX="${LIBRARY_PREFIX:-$PREFIX}" \
